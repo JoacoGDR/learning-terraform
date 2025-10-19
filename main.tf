@@ -58,7 +58,7 @@ module "alb" {
       port             = 80
       target_type      = "instance"
       targets = {
-        web-instance = {
+        web-target = {
           target_id = aws_instance.web.id
           port = 80
         }
@@ -70,8 +70,8 @@ module "alb" {
       port = 80
       protocol = "HTTP"
       default_action = {
-        type = "forward"
-        target_group_index = 0
+        type             = "forward"
+        target_group_key = "web-instance"
       }
     }
   }
