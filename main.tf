@@ -39,7 +39,7 @@ module "autoscaling" {
   max_size = var.scaling_max_size
 
   vpc_zone_identifier = module.web_vpc.public_subnets
-  target_group_arns = module.web_alb.target_group_arns
+  target_group_arn = module.web_alb.target_group_arns[0]
   security_groups = [module.web_security_group.security_group_id]
 
   image_id           = data.aws_ami.app_ami.id
