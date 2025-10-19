@@ -32,17 +32,17 @@ module "web_vpc" {
 
 module "autoscaling" {
   source  = "terraform-aws-modules/autoscaling/aws"
-  version = ">= 7.0.0"
+  version = "6.10.1"
 
   name = "web"
   min_size = var.scaling_min_size
   max_size = var.scaling_max_size
 
   vpc_zone_identifier = module.web_vpc.public_subnets
-  target_group_arns = [module.web_alb.target_group_arns[0]]
+  target_group_arns = module.web_alb.target_group_arns
   security_groups = [module.web_security_group.security_group_id]
 
-  image_id           = data.aws_ami.app_ami.id
+  image_id      = data.aws_ami.app_ami.id
   instance_type = var.instance_type
 }
 
