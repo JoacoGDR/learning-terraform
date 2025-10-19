@@ -65,14 +65,12 @@ module "alb" {
       }
     }
   }
-  listeners = {
+
+  http_tcp_listeners = {
     http = {
       port = 80
       protocol = "HTTP"
-      default_action = {
-        type             = "forward"
-        target_group_key = "web-instance"
-      }
+      target_group_index = 0
     }
   }
 
