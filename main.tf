@@ -51,8 +51,8 @@ module "alb" {
   subnets = module.web_vpc.public_subnets
   security_groups = [module.web_security_group.security_group_id]
 
-  target_groups = {
-    ex-instance = {
+  target_groups = [
+    {
       name_prefix      = "web-"
       protocol         = "HTTP"
       port             = 80
@@ -64,7 +64,8 @@ module "alb" {
         }
       }
     }
-  }
+  ]
+
   listeners = {
     http = {
       port = 80
