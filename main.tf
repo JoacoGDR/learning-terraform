@@ -57,12 +57,7 @@ module "alb" {
       protocol         = "HTTP"
       port             = 80
       target_type      = "instance"
-      targets = {
-        web-target = {
-          target_id = aws_instance.web.id
-          port = 80
-        }
-      }
+      target_id        = aws_instance.web.id
     }
   }
 
@@ -70,8 +65,7 @@ module "alb" {
     http = {
       port = 80
       protocol = "HTTP"
-      default_action = {
-        type             = "forward"
+      forward = {
         target_group_key = "web-instance"
       }
     }
@@ -81,7 +75,6 @@ module "alb" {
     Environment = "dev"
   }
 }
-
 
 module "web_security_group" {
   source  = "terraform-aws-modules/security-group/aws"
