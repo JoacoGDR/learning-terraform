@@ -60,10 +60,9 @@ module "web_alb" {
 
   target_groups = [
     {
-      name = "web-instance"
       name_prefix      = "web-"
-      protocol         = "HTTP"
-      port             = 8080
+      backend_protocol         = "HTTP"
+      backend_port             = 80
       target_type      = "instance"
     }
   ]
